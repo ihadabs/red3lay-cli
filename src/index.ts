@@ -1,6 +1,7 @@
 import { q2 } from './questions/q2';
 
 export const baseUrl = 'http://0.0.0.0:8080';
+export let token = '12394';
 
 async function start() {
 	/// Display welcome message

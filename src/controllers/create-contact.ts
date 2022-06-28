@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { prompt } from 'inquirer';
 import { v4 } from 'uuid';
-import { baseUrl } from '..';
+import { baseUrl, token } from '..';
 
 export async function createContact() {
 	const contactData = await prompt([
@@ -17,10 +17,18 @@ export async function createContact() {
 		},
 	]);
 
-	await axios.put(baseUrl + '/contacts', {
-		id: v4(),
-		...contactData,
-	});
+	await axios.put(
+		baseUrl + '/contacts',
+		{
+			id: v4(),
+			...contactData,
+		},
+		{
+			headers: {
+				authorization: 'Bearer ' + token,
+			},
+		}
+	);
 
 	console.log(`Contact for ${contactData.name}, has been added ✅`);
 }
