@@ -1,7 +1,11 @@
+import { q1 } from './questions/q1';
 import { q2 } from './questions/q2';
 
 export const baseUrl = 'http://0.0.0.0:8080';
-export let token = '12394';
+export const globalData: any = {
+	token: '',
+};
+let gg = '';
 
 async function start() {
 	/// Display welcome message
@@ -14,7 +18,7 @@ async function start() {
 	/// Q1/ Tell user about available options
 	/// 1- Login
 	/// 2- Quit
-	// await q1();
+	await q1();
 
 	/// Q2/ Tell logged in user about available options
 	/// 1- 'View contacts',

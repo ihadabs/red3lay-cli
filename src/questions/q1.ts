@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { prompt } from 'inquirer';
+import { baseUrl, globalData } from '..';
 
 export async function q1() {
 	const { q1Answer } = await prompt({
@@ -14,11 +16,11 @@ export async function q1() {
 		process.exit(0);
 	}
 
-	const { username, password } = await prompt([
+	const { email, password } = await prompt([
 		{
 			type: 'input',
-			name: 'username',
-			message: 'Enter your username 🥸 ',
+			name: 'email',
+			message: 'Enter your email 🥸 ',
 			filter: (val) => val.toLowerCase(),
 		},
 		{
@@ -28,8 +30,15 @@ export async function q1() {
 		},
 	]);
 
-	if (username !== 'ahlam' || password !== 'gg') {
-		console.log('Wrong username & password, bye!');
+	try {
+		const result = await axios.post(baseUrl + '/login', {
+			email,
+			password,
+		});
+		const newToken = result.data.token;
+		globalData.token = newToken;
+	} catch (err: any) {
+		console.log(err?.response?.data);
 		process.exit(0);
 	}
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { prompt } from 'inquirer';
 import { v4 } from 'uuid';
-import { baseUrl, token } from '..';
+import { baseUrl, globalData } from '..';
 
 export async function createContact() {
 	const contactData = await prompt([
@@ -25,7 +25,7 @@ export async function createContact() {
 		},
 		{
 			headers: {
-				authorization: 'Bearer ' + token,
+				authorization: 'Bearer ' + globalData.token,
 			},
 		}
 	);
